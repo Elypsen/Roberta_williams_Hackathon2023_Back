@@ -5,7 +5,7 @@ const {getAllFestival, getFestivalByDpt, getFestivalByName, createFestival, getO
 router.get('/', getAllFestival);
 router.get('/:id', getOneFestival);
 router.post('/dpt', getFestivalByDpt)
-router.get('/nom', getFestivalByName)
+router.post('/nom', getFestivalByName)
 router.post('/', createFestival)
 router.put('/', updateFestival)
 
