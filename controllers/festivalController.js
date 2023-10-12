@@ -1,4 +1,4 @@
-const Festival = require("../models/festival");
+const Festival = require("../models/Festival");
 
 const getAllFestival = async (req, res) => {
   try {
@@ -18,9 +18,21 @@ const getFestivalByDpt = async (req, res) => {
     res.status(404).json({ message: "getDepartements : " + err.message });
   }
 };
+const getFestivalByName= async(req, res)=> {
+  try {
+    const partielName = req.body.nom; // Les trois premières lettres du nom du festival
+    const regex = new RegExp(`^${partielName}`, 'i'); // Crée une expression régulière pour correspondre aux trois premières lettres (insensible à la casse)
+  const festivalName = await Festival.find({
+    'fields.nom_du_festival': { $regex: regex }
+  });
+    res.status(200).json(festivalName);
+  } catch (err) {
+    res.status(404).json({ message: "nomDuFestival : " + err.message });
+  }
 
+}
 module.exports = {
   getFestivalByDpt,
-  getFestivalByNom,
+  getFestivalByName,
   getAllFestival,
 };
