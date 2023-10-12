@@ -43,8 +43,9 @@ const getFestivalByName= async(req, res)=> {
 
 }
 const createFestival= async(req, res)=> {
-
-  const festival = new Festival(req.body);
+const body=req.body.festival
+console.log(body)
+  const festival = new Festival(body);
   festival.recordid=uuid
   console.log(festival)
   
