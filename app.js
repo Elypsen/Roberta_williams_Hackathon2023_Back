@@ -9,6 +9,7 @@ connectDB();
 
 const app = express();
 const Router= require('./routes/Router')
+const adminRouter= require('./routes/adminRouter')
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 app.use("/", Router)
+app.use("/admin", adminRouter)
 
 app.listen(8000, () => {
     console.log(`Le serveur est en écoute sur le port 8000`);
