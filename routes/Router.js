@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {getAllFestival} = require('../controller/festivalController')
+const {getAllFestival, getFestivalByDpt} = require('../controllers/festivalController')
 
 router.get('/', getAllFestival);
-router.get('/dpt', get)
+router.get('/dpt', getFestivalByDpt)
 
 module.exports= router;
