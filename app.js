@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 // connexion à la DB
 connectDB();
 const app = express();
-// const userRouter= require('./routes/userRoutes')
+const Router= require('./routes/Router')
 // const routerTask=require("./routes/taskRoutes")
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // const swaggerDocument = require('./swagger_output.json');
 // app.use('/docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+
 app.use(cors());
 
 
-// app.use("/task", routerTask);
-// app.use("/", userRouter)
+app.use("/", Router)
 
 app.listen(8000, () => {
     console.log(`Le serveur est en écoute sur le port 8000`);
