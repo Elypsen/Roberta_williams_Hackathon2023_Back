@@ -55,13 +55,10 @@ const updateFestival= async(req, res)=> {
   try {
     console.log(req.params)
     console.log(req.body)
-    
-    
     // Utilisez la méthode updateOne() de Mongoose pour mettre à jour un seul document
     // const task = await Task.updateOne({ _id:_id },{ isDone: newCompletedValue })
-   
+    const festival = await Task.findByIdAndUpdate(req.params._id, req.body.festival);
     res.status(200).json(festival);
-    const festival = await Task.findByIdAndUpdate(req.params._id, req.body);
     //  res.status(201).json(task);
   } catch (err) {
     res.status(404).json({ message: "updateFestival : " + err.message });
