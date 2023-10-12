@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 
 const festivalSchema = mongoose.Schema({
-
         datasetid: String,
         recordid: String,
         fields: {
