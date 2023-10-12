@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 
 
 const festivalSchema = mongoose.Schema({
-
         datasetid: String,
         recordid: String,
         fields: {
-          envergure_territoriale: String
+          envergure_territoriale: String,
           code_insee_commune: String,
           geocodage_xy: [Number, Number],
           complement_d_adresse_facultatif: String,
