@@ -8,6 +8,14 @@ const getAllFestival = async (req, res) => {
     console.log("getAllFestival :", err.message);
   }
 };
+const getOneFestival = async (req, res) => {
+  try {
+    const festival = await Festival.find({recordid: req.params.id});
+    res.status(200).json(festival);
+  } catch (err) {
+    console.log("getOneFestival :", err.message);
+  }
+};
 const getFestivalByDpt = async (req, res) => {
   try {
     const departements = await Festival.find({
@@ -31,8 +39,42 @@ const getFestivalByName= async(req, res)=> {
   }
 
 }
+const createFestival= async(req, res)=> {
+  const festival = new Festival(req.body);
+  console.log(festival)
+  await festival.validate();
+  try {
+    await Festival.create(festival);
+    res.status(200).json(festival);
+  } catch (err) {
+    res.status(404).json({ message: "createfestival : " + err.message });
+  }
+
+}
+const updateFestival= async(req, res)=> {
+  try {
+    console.log(req.params)
+    console.log(req.body)
+    
+    
+    // Utilisez la méthode updateOne() de Mongoose pour mettre à jour un seul document
+    // const task = await Task.updateOne({ _id:_id },{ isDone: newCompletedValue })
+   
+    res.status(200).json(festival);
+    const festival = await Task.findByIdAndUpdate(req.params._id, req.body);
+    //  res.status(201).json(task);
+  } catch (err) {
+    res.status(404).json({ message: "updateFestival : " + err.message });
+  }
+}
+
+
 module.exports = {
   getFestivalByDpt,
+  getOneFestival,
   getFestivalByName,
   getAllFestival,
+  createFestival,
+  updateFestival
+
 };

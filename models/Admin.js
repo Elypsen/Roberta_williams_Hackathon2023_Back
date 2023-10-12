@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
-const adminSchema = Schema({
+
+const adminSchema = mongoose.Schema({
     username: {
         type: String,
         unique: true
