@@ -1,5 +1,8 @@
 const Festival = require("../models/Festival");
+const { v4: uuidv4 } = require('uuid');
 
+// Générer un nouvel UUID (v4)
+const uuid = uuidv4();
 const getAllFestival = async (req, res) => {
   try {
     const festivals = await Festival.find({}).limit(50);
@@ -40,8 +43,11 @@ const getFestivalByName= async(req, res)=> {
 
 }
 const createFestival= async(req, res)=> {
+
   const festival = new Festival(req.body);
+  festival.recordid=uuid
   console.log(festival)
+  
   await festival.validate();
   try {
     await Festival.create(festival);
