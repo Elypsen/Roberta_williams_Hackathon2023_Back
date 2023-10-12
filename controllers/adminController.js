@@ -26,9 +26,9 @@ async function connectAdmin(req, res) {
     // #swagger.description = 'Endpoint to authenticate a admin and return a JWT token'
     
     
-    let adminName = req.body.username;
+    let username = req.body.username;
     try {
-        const admin = await admin.findOne({ username: username });
+        const admin = await Admin.findOne({ username: username });
         try {
             if (await argon2.verify(admin.password, req.body.password)) {
                 const token = generateAccessToken(admin.username,admin.role );

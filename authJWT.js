@@ -1,8 +1,8 @@
-const { SECRET } = require("./.env");
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 function generateAccessToken(pseudo, role) {
-  return jwt.sign({ username: pseudo, role: role }, SECRET, { expiresIn: "3600sec" });
+  return jwt.sign({ username: pseudo, role: role }, process.env.SECRET, { expiresIn: "3600sec" });
 }
 
 function authenticateToken(req, res, next) {
@@ -11,7 +11,7 @@ function authenticateToken(req, res, next) {
   if (token == null) {
     res.sendStatus(401).json({ message: "token inexistant." });
   } else {
-    jwt.verify(token, SECRET, (err, user) => {
+    jwt.verify(token, process.env.SECRET, (err, user) => {
       if (err) {
         res.status(403).json({ message: "authenticateToken : " + err.message });
       } else {
