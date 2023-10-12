@@ -1,7 +1,6 @@
-// const Admin = require("../models/Admin");
 const Admin = require("../models/admin");
 const argon2 = require("argon2");
-// const { generateAccessToken } = require("../authJWT");
+const { generateAccessToken } = require("../authJWT");
 async function createAdmin(req, res) {
     // #swagger.tags = ['admins']
       // #swagger.description = 'Endpoint to create a new admin.'
@@ -26,13 +25,13 @@ async function connectAdmin(req, res) {
     // #swagger.summary = 'Get authentication token'
     // #swagger.description = 'Endpoint to authenticate a admin and return a JWT token'
     
-    let admin;
-    let adminname = req.body.username;
+    
+    let adminName = req.body.username;
     try {
-        admin = await admin.findOne({ username: username });
+        const admin = await admin.findOne({ username: username });
         try {
             if (await argon2.verify(admin.password, req.body.password)) {
-                const token = generateAccessToken(admin.username);
+                const token = generateAccessToken(admin.username,admin.role );
                 res.status(200).json(token);
             } else {
                 res.status(400).json({ message: "Mauvais mot de passe ! " });

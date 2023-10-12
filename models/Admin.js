@@ -5,13 +5,14 @@ const adminSchema = mongoose.Schema({
         type: String,
         unique: true
     },
-   
-
     password: String,
-    
+    role: {
+        type:String,
+        default: "user",
+    }
 
 })
 
 const Admin = mongoose.model('Admin', adminSchema);
 
-module.exports = Admin;
+module.exports = Admin; 
