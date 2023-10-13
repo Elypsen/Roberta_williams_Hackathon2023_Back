@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 
 // Générer un nouvel UUID (v4)
 const uuid = uuidv4();
-const getAllFestival = async (req, res) => {
+const getSampleFestival = async (req, res) => {
   try {
     const festivals = await Festival.find({}).limit(50);
     res.status(200).json(festivals);
@@ -36,7 +36,7 @@ const getFestivalByName = async (req, res) => {
     const festivalName = await Festival.find({
       "fields.nom_du_festival": { $regex: regex },
     });
-    res.status(200).json(festivalName);
+    res.status(200).json({festivalName, });
   } catch (err) {
     res.status(404).json({ message: "nomDuFestival : " + err.message });
   }
@@ -67,7 +67,19 @@ const updateFestival = async (req, res) => {
   }
 };
 
+const getAllFestival = async(req, res)=>{
+  try{
+    const festivals =  await Festival.find({})
+    res.status(200).json(festivals)
+  }catch(err){
+    res.status(400).json({message: "GetALL :" + err.message})
+  }
+}
+
+
+
 module.exports = {
+  getSampleFestival,
   getFestivalByDpt,
   getOneFestival,
   getFestivalByName,
