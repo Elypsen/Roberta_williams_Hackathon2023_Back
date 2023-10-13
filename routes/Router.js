@@ -8,6 +8,6 @@ router.post('/dpt', getFestivalByDpt)
 router.post('/nom', getFestivalByName)
 
 router.post('/', createFestival)
-router.put('/', updateFestival)
+router.put('/:id', updateFestival)
 
 module.exports= router;
