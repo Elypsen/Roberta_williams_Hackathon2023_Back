@@ -76,9 +76,17 @@ const getAllFestival = async(req, res)=>{
   }
 }
 
-
+const getCount = async(req,res)=>{
+  try{
+    const count = await Festival.count({});
+    res.status(200).json(count);
+  }catch(err){
+    res.status(400).json({message: "GETCOUNT: " + err.message})
+  }
+}
 
 module.exports = {
+  getCount,
   getSampleFestival,
   getFestivalByDpt,
   getOneFestival,
